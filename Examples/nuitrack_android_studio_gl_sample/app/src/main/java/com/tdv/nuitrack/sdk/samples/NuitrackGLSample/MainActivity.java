@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.app.NativeActivity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.tdv.nuitrack.sdk.Nuitrack;
 
@@ -34,14 +35,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void NuitrackInit() {
+        Log.d("whie", "pre-Nuitrack.init()");
         Nuitrack.init(this, new Nuitrack.NuitrackCallback() {
             public void onInitSuccess(Context context) {
+                Log.d("whie", "Nuitrack.init() onInitSuccess()");
                 Intent intent = new Intent(context, NativeActivity.class);
                 startActivity(intent);
                 finish();
             }
-            public void onInitFailure(int errorId) {}
+            public void onInitFailure(int errorId) {
+                Log.d("whie", "Nuitrack.init() onInitFailure(): " + errorId);
+            }
         });
+        Log.d("whie", "post-Nuitrack.init()");
     }
 
     @Override
